@@ -5,5 +5,20 @@ import pandas as pd
 tickers = "TSLA", "AAPL", "INTC", "NVDA", "NFLX", "META", "MSFT", "GPRO", "DIS", "SBUX"
 data = yf.download(tickers, start="2023-01-01", end="2024-01-01", interval="1d")
 
-#check the first few rows
-print(data.head())
+# Check the first few rows
+#print(data.head())
+
+# Converting the index to datetime, in case it wasn't already done
+data.index = pd.to_datetime(data.index)
+
+# Sorting the data by date to ensure chronological order
+data = data.sort_index()
+
+# Checking for missing values
+print(data.isnull().sum())
+
+# Filling missing values (forward-filling the previous day's data)
+data.fillna(method = 'ffill', inplace = True)
+
+# Drop the rows that are still NaN if they exist after forward filling
+data.dropna(inplace = True)
