@@ -21,4 +21,21 @@ print(data.isnull().sum())
 data.fillna(method = 'ffill', inplace = True)
 
 # Drop the rows that are still NaN if they exist after forward filling
+<<<<<<< Updated upstream
 data.dropna(inplace = True)
+=======
+data.dropna(inplace = True)
+
+# Starting analysis of data
+# Computing Daily Returns
+# Did not work due to "ValueError: Cannot set a DataFrame with multiple columns to the single column Return"
+# data['Return'] = data['Close'].pct_change()
+
+# Compute daily returns for all stocks
+returns = data['Close'].pct_change()
+
+data = pd.concat([data, returns.rename(columns=lambda x: ('Return', x))], axis=1)
+
+# Checking to see if data correctly prints
+print(data.head())
+>>>>>>> Stashed changes
