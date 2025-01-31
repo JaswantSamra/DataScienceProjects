@@ -18,12 +18,11 @@ data = data.sort_index()
 print(data.isnull().sum())
 
 # Filling missing values (forward-filling the previous day's data)
-data.fillna(method = 'ffill', inplace = True)
+data.ffill(inplace = True)
 
 # Drop the rows that are still NaN if they exist after forward filling
-<<<<<<< Updated upstream
 data.dropna(inplace = True)
-=======
+
 data.dropna(inplace = True)
 
 # Starting analysis of data
@@ -38,4 +37,5 @@ data = pd.concat([data, returns.rename(columns=lambda x: ('Return', x))], axis=1
 
 # Checking to see if data correctly prints
 print(data.head())
->>>>>>> Stashed changes
+
+data.dropna(inplace = True)
