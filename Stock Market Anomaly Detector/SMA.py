@@ -15,14 +15,12 @@ data.index = pd.to_datetime(data.index)
 data = data.sort_index()
 
 # Checking for missing values
-print(data.isnull().sum())
+#print(data.isnull().sum())
 
 # Filling missing values (forward-filling the previous day's data)
 data.ffill(inplace = True)
 
 # Drop the rows that are still NaN if they exist after forward filling
-data.dropna(inplace = True)
-
 data.dropna(inplace = True)
 
 # Starting analysis of data
@@ -35,7 +33,3 @@ returns = data['Close'].pct_change()
 
 data = pd.concat([data, returns.rename(columns=lambda x: ('Return', x))], axis=1)
 
-# Checking to see if data correctly prints
-print(data.head())
-
-data.dropna(inplace = True)
